@@ -73,7 +73,7 @@ private:
 	const int k = 0;
 	KDNode* root = nullptr;
 	int count = 0;
-	vector<Point>* points = nullptr;
+	vector<Point>* points = new vector<Point>;
 
 	KDNode* min = nullptr;
 	KDNode* max = nullptr;
@@ -132,6 +132,30 @@ private:
 		}
 	}
 
+	vector<Point> searchRangeHelper(KDNode* node, vector<float> lower_Bounds, vector<float> upper_Bounds)
+	{
+		if (!node) return {};
+		int c = 0;
+
+		for (int i = 0; i < k; i++)
+			if (node->point->getDimension(i) >= lower_Bounds[i]
+				&& node->point->getDimension(i) <= upper_Bounds[i])
+				c++;
+			else
+				break;
+
+		if (c == k)
+			points->push_back(*node->point);
+
+		if (!(node->point->getDimension(node->getLevel() % k) < lower_Bounds[node->getLevel() % k]))
+			searchRangeHelper(node->left, lower_Bounds, upper_Bounds);
+
+		if (!(node->point->getDimension(node->getLevel() % k) > upper_Bounds[node->getLevel() % k]))
+			searchRangeHelper(node->right, lower_Bounds, upper_Bounds);
+
+		return *points;
+	}
+
 public:
 	KDTree(int _k) : k(_k) {}
 
@@ -179,6 +203,13 @@ public:
 				level++;
 			}
 		}
+	}
+
+	vector<Point> searchRange(vector<float> lower_bounds, vector<float> upper_bounds)
+	{
+		vector<Point> points;
+		points = searchRangeHelper(root, lower_bounds, upper_bounds);
+		return points;
 	}
 
 	bool pointExists(vector<float> axis)
