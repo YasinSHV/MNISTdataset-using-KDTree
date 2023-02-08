@@ -1,0 +1,4 @@
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(513,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (YasinSHV-DS.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  MNISTdataset-using-KDTree.cpp
+C:\Users\yshab\source\repos\YasinSHV-DS\YasinSHV-DS\MNISTdataset-using-KDTree.cpp(27,20): warning C4018: '<': signed/unsigned mismatch
+  YasinSHV-DS.vcxproj -> C:\Users\yshab\source\repos\YasinSHV-DS\Debug\MNISTdataset-using-KDTree.exe
